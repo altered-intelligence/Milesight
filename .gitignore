@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+
+# Go
+bin/
+vendor/
+*.test
+
+# Xcode / iOS
+DerivedData/
+build/
+*.xcuserstate
+xcuserdata/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# SwiftPM
+.build/
+.swiftpm/
+Packages/**/.build/
