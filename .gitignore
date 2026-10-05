@@ -17,6 +17,9 @@ xcuserdata/
 .env.*
 !.env.example
 
+# Xcode derived data
+ios/.dd/
+
 # SwiftPM
 .build/
 .swiftpm/
