@@ -1,0 +1,33 @@
+# XcodeGen spec — generate the Milesight app target:
+#   brew install xcodegen && xcodegen generate
+name: Milesight
+options:
+  bundleIdPrefix: com.milesight
+  deploymentTarget:
+    iOS: "17.0"
+packages:
+  CoreKit:
+    path: Packages/CoreKit
+  LiveKit:
+    path: Packages/LiveKit
+  AnalyticsKit:
+    path: Packages/AnalyticsKit
+  CommandsKit:
+    path: Packages/CommandsKit
+  NotificationsKit:
+    path: Packages/NotificationsKit
+targets:
+  Milesight:
+    type: application
+    platform: iOS
+    sources: [App]
+    dependencies:
+      - package: CoreKit
+      - package: LiveKit
+      - package: AnalyticsKit
+      - package: CommandsKit
+      - package: NotificationsKit
+    settings:
+      base:
+        INFOPLIST_KEY_CFBundleDisplayName: Milesight
+        PRODUCT_BUNDLE_IDENTIFIER: com.milesight.ios
