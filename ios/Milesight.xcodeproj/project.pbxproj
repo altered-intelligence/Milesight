@@ -1,0 +1,389 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2665C3552DAD4F76657E2AF4 /* NotificationsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3E0178C681005B1DAB08B250 /* NotificationsKit */; };
+		45A943BD4AAAB6AE897216DA /* CoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1F0C2DDB621AB41FEEAF2D18 /* CoreKit */; };
+		4667581BE733C7B298B98743 /* VehicleDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AA3EBC76FB76F508E85291 /* VehicleDashboardView.swift */; };
+		68373FD415E01F009E5F9A4F /* MilesightApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738C4C3701B5F8CB8F5ED90 /* MilesightApp.swift */; };
+		96BC4CACF55F7A652E2B7950 /* VehiclesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81287D7035CF760DA77C839B /* VehiclesListView.swift */; };
+		A950C11D08DECFD0E9E5BBA6 /* LiveKit in Frameworks */ = {isa = PBXBuildFile; productRef = F5C134E1E180E290844F0908 /* LiveKit */; };
+		B63BACC628F4471C5A5A3ECB /* AnalyticsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 94CFB3E786E7A385B3162399 /* AnalyticsKit */; };
+		CF736E2909664F559F1304FA /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4E6452EEB1776A3C8665B /* AppContainer.swift */; };
+		DE5FE38A505F30EB871A0E81 /* CommandsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 410EFFE6F1F2313C5E6DC1BD /* CommandsKit */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		33241A5AE18B122AF431AEE9 /* Milesight.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Milesight.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		35AA3EBC76FB76F508E85291 /* VehicleDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleDashboardView.swift; sourceTree = "<group>"; };
+		443778773A70F6FF27A3A84E /* LiveKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LiveKit; path = Packages/LiveKit; sourceTree = SOURCE_ROOT; };
+		7663BF1828498BC7EA184C3E /* CommandsKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CommandsKit; path = Packages/CommandsKit; sourceTree = SOURCE_ROOT; };
+		779C385A1421A418885EF64D /* CoreKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CoreKit; path = Packages/CoreKit; sourceTree = SOURCE_ROOT; };
+		7C76F39476557A71C9656691 /* AnalyticsKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AnalyticsKit; path = Packages/AnalyticsKit; sourceTree = SOURCE_ROOT; };
+		81287D7035CF760DA77C839B /* VehiclesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehiclesListView.swift; sourceTree = "<group>"; };
+		9FD7BC8430651A337E013578 /* NotificationsKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = NotificationsKit; path = Packages/NotificationsKit; sourceTree = SOURCE_ROOT; };
+		B2F4E6452EEB1776A3C8665B /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
+		F738C4C3701B5F8CB8F5ED90 /* MilesightApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilesightApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CBCF4838AD000342A97EB88C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45A943BD4AAAB6AE897216DA /* CoreKit in Frameworks */,
+				A950C11D08DECFD0E9E5BBA6 /* LiveKit in Frameworks */,
+				B63BACC628F4471C5A5A3ECB /* AnalyticsKit in Frameworks */,
+				DE5FE38A505F30EB871A0E81 /* CommandsKit in Frameworks */,
+				2665C3552DAD4F76657E2AF4 /* NotificationsKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		674DD72EAE251F3924DA63B1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				33241A5AE18B122AF431AEE9 /* Milesight.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		876752710AC5E4DCF508ACFD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B2F4E6452EEB1776A3C8665B /* AppContainer.swift */,
+				F738C4C3701B5F8CB8F5ED90 /* MilesightApp.swift */,
+				35AA3EBC76FB76F508E85291 /* VehicleDashboardView.swift */,
+				81287D7035CF760DA77C839B /* VehiclesListView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D1E04DE1E22F9DDE9FD2DCE7 = {
+			isa = PBXGroup;
+			children = (
+				876752710AC5E4DCF508ACFD /* App */,
+				E47DB599A021190079C023FB /* Packages */,
+				674DD72EAE251F3924DA63B1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E47DB599A021190079C023FB /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				7C76F39476557A71C9656691 /* AnalyticsKit */,
+				7663BF1828498BC7EA184C3E /* CommandsKit */,
+				779C385A1421A418885EF64D /* CoreKit */,
+				443778773A70F6FF27A3A84E /* LiveKit */,
+				9FD7BC8430651A337E013578 /* NotificationsKit */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		470756A8CD1A33EA40240C56 /* Milesight */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A95B3DA2FFBD64578E47431B /* Build configuration list for PBXNativeTarget "Milesight" */;
+			buildPhases = (
+				79DD93057F1D5B04437E3232 /* Sources */,
+				CBCF4838AD000342A97EB88C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Milesight;
+			packageProductDependencies = (
+				1F0C2DDB621AB41FEEAF2D18 /* CoreKit */,
+				F5C134E1E180E290844F0908 /* LiveKit */,
+				94CFB3E786E7A385B3162399 /* AnalyticsKit */,
+				410EFFE6F1F2313C5E6DC1BD /* CommandsKit */,
+				3E0178C681005B1DAB08B250 /* NotificationsKit */,
+			);
+			productName = Milesight;
+			productReference = 33241A5AE18B122AF431AEE9 /* Milesight.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		13471F16DB797964999BAA27 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 711A0A6C6894162D3FFE2A34 /* Build configuration list for PBXProject "Milesight" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = D1E04DE1E22F9DDE9FD2DCE7;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				EF871D59C525A2EA1D445915 /* XCLocalSwiftPackageReference "Packages/AnalyticsKit" */,
+				737AD4587A3262EC35F0EA9B /* XCLocalSwiftPackageReference "Packages/CommandsKit" */,
+				1FDBDDA3EAA52CC6CFA3DAAE /* XCLocalSwiftPackageReference "Packages/CoreKit" */,
+				AB250FF543B345917A544601 /* XCLocalSwiftPackageReference "Packages/LiveKit" */,
+				D4497A21A855BD204EB037D0 /* XCLocalSwiftPackageReference "Packages/NotificationsKit" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 674DD72EAE251F3924DA63B1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				470756A8CD1A33EA40240C56 /* Milesight */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		79DD93057F1D5B04437E3232 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF736E2909664F559F1304FA /* AppContainer.swift in Sources */,
+				68373FD415E01F009E5F9A4F /* MilesightApp.swift in Sources */,
+				4667581BE733C7B298B98743 /* VehicleDashboardView.swift in Sources */,
+				96BC4CACF55F7A652E2B7950 /* VehiclesListView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1E96A0CF4A3C55D774B9322C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		3E9D5ED8037DD4FFA69B8147 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_CFBundleDisplayName = Milesight;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.milesight.ios;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		894850112332E0B9A6A30192 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A73B414725D0B60DA3CBC7AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_CFBundleDisplayName = Milesight;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.milesight.ios;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		711A0A6C6894162D3FFE2A34 /* Build configuration list for PBXProject "Milesight" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E96A0CF4A3C55D774B9322C /* Debug */,
+				894850112332E0B9A6A30192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A95B3DA2FFBD64578E47431B /* Build configuration list for PBXNativeTarget "Milesight" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A73B414725D0B60DA3CBC7AF /* Debug */,
+				3E9D5ED8037DD4FFA69B8147 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		1FDBDDA3EAA52CC6CFA3DAAE /* XCLocalSwiftPackageReference "Packages/CoreKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/CoreKit;
+		};
+		737AD4587A3262EC35F0EA9B /* XCLocalSwiftPackageReference "Packages/CommandsKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/CommandsKit;
+		};
+		AB250FF543B345917A544601 /* XCLocalSwiftPackageReference "Packages/LiveKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/LiveKit;
+		};
+		D4497A21A855BD204EB037D0 /* XCLocalSwiftPackageReference "Packages/NotificationsKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/NotificationsKit;
+		};
+		EF871D59C525A2EA1D445915 /* XCLocalSwiftPackageReference "Packages/AnalyticsKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/AnalyticsKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1F0C2DDB621AB41FEEAF2D18 /* CoreKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreKit;
+		};
+		3E0178C681005B1DAB08B250 /* NotificationsKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NotificationsKit;
+		};
+		410EFFE6F1F2313C5E6DC1BD /* CommandsKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CommandsKit;
+		};
+		94CFB3E786E7A385B3162399 /* AnalyticsKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AnalyticsKit;
+		};
+		F5C134E1E180E290844F0908 /* LiveKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LiveKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 13471F16DB797964999BAA27 /* Project object */;
+}
