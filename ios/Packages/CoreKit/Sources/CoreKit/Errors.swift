@@ -38,15 +38,16 @@ public enum MilesightError: Error, Sendable, Equatable, LocalizedError {
     }
 
     static func humanReason(_ reason: String?) -> String {
-        switch reason {
+        let r = reason ?? ""
+        switch r {
         case "in_motion": return "the car is moving."
         case "not_plugged_in": return "the car isn't plugged in."
         case "complete": return "charging is already complete."
         case "is_charging": return "it's already charging."
         case "not_charging": return "it isn't charging."
         case "cable connected": return "the charge cable is connected."
-        case .some(let r) where !r.isEmpty: return r.replacingOccurrences(of: "_", with: " ") + "."
-        default: return "no reason given."
+        case "": return "no reason given."
+        default: return r.replacingOccurrences(of: "_", with: " ") + "."
         }
     }
 }

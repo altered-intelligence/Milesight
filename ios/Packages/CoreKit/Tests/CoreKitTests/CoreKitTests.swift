@@ -14,7 +14,7 @@ final class CodingTests: XCTestCase {
     }
 
     func testEncodingUsesSnakeCaseIncludingDictionaryKeys() throws {
-        let rule = Rule(type: "low_battery", enabled: true, params: ["thresholdPct": 15])
+        let rule = Rule(type: "low_battery", enabled: true, params: ["threshold_pct": 15])
         let json = String(decoding: try MilesightJSON.encoder.encode(rule), as: UTF8.self)
         XCTAssertTrue(json.contains("\"threshold_pct\""), json)
         let patch = PreferencesPatch(distanceUnit: "km", energyRatePerKwh: 0.2)

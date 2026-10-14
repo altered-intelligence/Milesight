@@ -87,7 +87,7 @@ public enum Curves {
 
     /// Charging power against state of charge (the classic DC taper curve).
     public static func powerBySoC(_ d: ChargeDetail) -> [(soc: Double, kw: Double)] {
-        d.curve.map { ($0.batteryPct, $0.powerKw) }.sorted { $0.soc < $1.soc }
+        d.curve.map { (soc: $0.batteryPct, kw: $0.powerKw) }.sorted { $0.soc < $1.soc }
     }
 
     /// Speed along a trip in display units.

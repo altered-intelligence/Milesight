@@ -46,13 +46,13 @@ public actor APIClient {
 
     /// Emits the new session whenever it changes (nil = signed out).
     public func sessionChanges() -> AsyncStream<Session?> {
+        let (stream, continuation) = AsyncStream<Session?>.makeStream()
         let id = UUID()
-        return AsyncStream { continuation in
-            continuations[id] = continuation
-            continuation.onTermination = { [weak self] _ in
-                Task { await self?.removeContinuation(id) }
-            }
+        continuations[id] = continuation
+        continuation.onTermination = { [weak self] _ in
+            Task { await self?.removeContinuation(id) }
         }
+        return stream
     }
 
     private func removeContinuation(_ id: UUID) { continuations[id] = nil }

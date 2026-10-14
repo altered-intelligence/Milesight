@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Backend (Go + TimescaleDB)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: timescale/timescaledb:latest-pg16
+        env:
+          POSTGRES_USER: milesight
+          POSTGRES_PASSWORD: milesight
+          POSTGRES_DB: milesight
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U milesight"
+          --health-interval 2s --health-timeout 3s --health-retries 30
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.sum
+      - name: Format
+        run: test -z "$(gofmt -l .)" || (gofmt -l . && exit 1)
+      - name: Vet
+        run: go vet ./...
+      - name: Test (race, incl. Postgres + Timescale conformance)
+        env:
+          MILESIGHT_TEST_DATABASE_URL: postgres://milesight:milesight@localhost:5432/milesight?sslmode=disable
+        run: go test -race -count=1 ./...
+      - name: Fixture generator runs
+        # Client contract fixtures (ios/.../Fixtures) are produced by this command.
+        run: go run ./cmd/fixtures -out "$RUNNER_TEMP/fixtures" > /dev/null
+      - name: Build server
+        run: go build -o /dev/null ./cmd/server
+      - name: Build Docker image
+        run: docker build -t milesight-api:ci .
+
+  ios:
+    name: iOS (packages + app build)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: xcodebuild -version && swift --version
+      - name: Package tests
+        run: |
+          set -e
+          for p in CoreKit LiveKit CommandsKit AnalyticsKit NotificationsKit; do
+            echo "::group::$p"
+            (cd "ios/Packages/$p" && swift test)
+            echo "::endgroup::"
+          done
+      - name: Generate Xcode project
+        run: brew install xcodegen && cd ios && xcodegen generate
+      - name: Build app (simulator, unsigned)
+        run: |
+          cd ios
+          xcodebuild -project Milesight.xcodeproj -scheme Milesight -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO build | tail -n 50
+          exit ${PIPESTATUS[0]}

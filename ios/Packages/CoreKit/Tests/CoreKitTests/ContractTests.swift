@@ -78,7 +78,7 @@ final class ContractTests: XCTestCase {
         let rules = try decode(RuleList.self, "rules")
         XCTAssertEqual(rules.rules.count, 10)
         let low = try XCTUnwrap(rules.rules.first { $0.type == "low_battery" })
-        XCTAssertEqual(low.params?["thresholdPct"], 20, "dictionary keys are camelCased by the decoder")
+        XCTAssertEqual(low.params?["threshold_pct"], 20)
         let g = try decode(Geofence.self, "geofence")
         XCTAssertEqual(g.name, "Home")
         XCTAssertEqual(g.energyRatePerKwh, 0.12)

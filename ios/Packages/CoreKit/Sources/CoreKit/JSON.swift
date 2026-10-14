@@ -3,9 +3,8 @@ import Foundation
 /// JSON coding that matches the server contract (docs/api.md):
 /// snake_case keys and RFC 3339 timestamps (the Go server emits up to nanosecond precision).
 ///
-/// Note: `convertFromSnakeCase` also converts *dictionary* keys, so free-form
-/// dictionaries (e.g. `Event.payload`, `Rule.params`) are camelCase in Swift
-/// (`"battery_pct"` → `"batteryPct"`) and convert back when encoded.
+/// Free-form dictionaries (`Event.payload`, `Rule.params`) are normalized to
+/// snake_case keys after decoding (see `SnakeCase`), matching the wire format.
 public enum MilesightJSON {
     public static let decoder: JSONDecoder = {
         let d = JSONDecoder()

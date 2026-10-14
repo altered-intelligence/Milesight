@@ -556,7 +556,7 @@ public struct GeofenceInput: Encodable, Sendable {
 public struct Rule: Codable, Sendable, Hashable, Identifiable {
     public var type: String
     public var enabled: Bool
-    /// camelCase keys in Swift (e.g. "thresholdPct", "minutes"); see MilesightJSON.
+    /// Keys are snake_case, exactly as on the wire (e.g. "threshold_pct", "minutes").
     public var params: [String: Double]?
 
     public var id: String { type }
@@ -565,6 +565,36 @@ public struct Rule: Codable, Sendable, Hashable, Identifiable {
         self.type = type
         self.enabled = enabled
         self.params = params
+    }
+
+    private enum CodingKeys: String, CodingKey { case type, enabled, params }
+
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        type = try c.decode(String.self, forKey: .type)
+        enabled = try c.decode(Bool.self, forKey: .enabled)
+        params = try c.decodeIfPresent([String: Double].self, forKey: .params).map(SnakeCase.keys)
+    }
+}
+
+/// Normalizes free-form dictionary keys to snake_case (JSON key strategies may
+/// or may not rewrite dictionary keys, depending on the Foundation version).
+public enum SnakeCase {
+    public static func convert(_ s: String) -> String {
+        var out = ""
+        for ch in s {
+            if ch.isUppercase {
+                if !out.isEmpty { out.append("_") }
+                out.append(contentsOf: ch.lowercased())
+            } else {
+                out.append(ch)
+            }
+        }
+        return out
+    }
+
+    public static func keys<V>(_ d: [String: V]) -> [String: V] {
+        Dictionary(d.map { (convert($0.key), $0.value) }, uniquingKeysWith: { a, _ in a })
     }
 }
 
@@ -577,11 +607,27 @@ public struct Event: Codable, Sendable, Hashable, Identifiable {
     public var title: String
     public var body: String
     public var occurredAt: Date
-    /// camelCase keys in Swift (e.g. "deepLink", "batteryPct").
+    /// Keys are snake_case, as on the wire (e.g. "deep_link", "battery_pct").
     public var payload: [String: JSONValue]?
     public var deliveredAt: Date?
 
-    public var deepLink: URL? { payload?["deepLink"]?.string.flatMap(URL.init(string:)) }
+    public var deepLink: URL? { payload?["deep_link"]?.string.flatMap(URL.init(string:)) }
+
+    private enum CodingKeys: String, CodingKey {
+        case id, vehicleId, type, title, body, occurredAt, payload, deliveredAt
+    }
+
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(Int64.self, forKey: .id)
+        vehicleId = try c.decode(String.self, forKey: .vehicleId)
+        type = try c.decode(String.self, forKey: .type)
+        title = try c.decode(String.self, forKey: .title)
+        body = try c.decode(String.self, forKey: .body)
+        occurredAt = try c.decode(Date.self, forKey: .occurredAt)
+        payload = try c.decodeIfPresent([String: JSONValue].self, forKey: .payload).map(SnakeCase.keys)
+        deliveredAt = try c.decodeIfPresent(Date.self, forKey: .deliveredAt)
+    }
 }
 
 public struct PushDevice: Codable, Sendable, Hashable {

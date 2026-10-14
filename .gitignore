@@ -27,3 +27,5 @@ Packages/**/.build/
 
 # XcodeGen output (generate with `cd ios && xcodegen generate`)
 ios/Milesight.xcodeproj/
+ios/App/Info.plist
+ios/App/Milesight.entitlements
