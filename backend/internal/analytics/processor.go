@@ -102,12 +102,14 @@ type State struct {
 
 // NotifyState is owned by the notification engine but persisted alongside.
 type NotifyState struct {
-	UnlockedSince  *time.Time           `json:"unlocked_since,omitempty"`
-	OpenSince      *time.Time           `json:"open_since,omitempty"`
-	Fired          map[string]time.Time `json:"fired,omitempty"`
-	LowArmed       bool                 `json:"low_armed"`
-	Place          string               `json:"place,omitempty"`
-	UpdateNotified string               `json:"update_notified,omitempty"`
+	UnlockedSince   *time.Time `json:"unlocked_since,omitempty"`
+	UnlockedAlerted bool       `json:"unlocked_alerted,omitempty"`
+	OpenSince       *time.Time `json:"open_since,omitempty"`
+	OpenAlerted     bool       `json:"open_alerted,omitempty"`
+	LowFired        bool       `json:"low_fired,omitempty"` // re-armed once 5 points above threshold
+	Place           string     `json:"place,omitempty"`
+	PlaceKnown      bool       `json:"place_known,omitempty"`
+	UpdateNotified  string     `json:"update_notified,omitempty"`
 }
 
 type tripAcc struct {

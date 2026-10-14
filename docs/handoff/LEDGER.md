@@ -6,14 +6,14 @@ Single source of truth for what is planned, built and proven. Protocol and statu
 Evidence commands assume `cd backend` and the environment in [`ENVIRONMENT.md`](ENVIRONMENT.md).
 `PG` = run with `MILESIGHT_TEST_DATABASE_URL` set (otherwise those tests skip).
 
-_Last updated: S01 (2026-10-14, Claude Opus 5.5) — mid-session._
+_Last updated: S01 (2026-10-14, Claude Opus 5.5) — backend milestone reached; iOS next._
 
 ## Backend (Go)
 
 | ID | Item | Status | Evidence | Notes |
 |---|---|---|---|---|
 | BE-01 | API contract types, SI units, snake_case (`internal/models`) | TESTED | exercised by store/analytics/tesla tests | ADR-009 |
-| BE-02 | Config load + validation (`internal/config`) | IMPLEMENTED | — | needs unit tests |
+| BE-02 | Config load + validation (`internal/config`) | TESTED | `go test ./internal/config` |  |
 | BE-03 | Store interface + in-memory store | TESTED | `go test ./internal/store/memory` (conformance suite) | |
 | BE-04 | Postgres store + embedded migrations | TESTED | PG: `go test ./internal/store/postgres` (same conformance suite, PG 16) | Timescale branch of 0002 **untested** (no Timescale here) |
 | BE-05 | Auth: HS256 JWT, AES-GCM token cipher, PKCE, refresh rotation + reuse detection | TESTED | `go test ./internal/auth` | ADR-014 |
@@ -27,19 +27,19 @@ _Last updated: S01 (2026-10-14, Claude Opus 5.5) — mid-session._
 | BE-13 | Analytics: trip/charge segmentation, drain | TESTED | `go test ./internal/analytics` incl. `TestSimulatedMonth` | |
 | BE-14 | Daily/weekly/monthly rollups (tz-aware) | TESTED | `TestRollupBucketsAndDrainSplit` | |
 | BE-15 | Battery health estimate | TESTED | `TestBatteryHealth`, `TestSimulatedMonth` | |
-| BE-16 | Realtime hub (typed messages, watcher counts) | PLANNED | | |
-| BE-17 | Ingestion manager (sleep/cost-aware polling, history seeding, poke after command) | PLANNED | | ADR-013 |
-| BE-18 | Notification rule engine + event log | PLANNED | | |
-| BE-19 | APNs pusher (token auth, ES256) + log pusher | PLANNED | | real APNs needs Apple key — BLOCKED for verification |
-| BE-20 | Commands service (validation, wake-then-send, rate limit, audit) | PLANNED | | |
-| BE-21 | HTTP API — every route in `docs/api.md` | PLANNED | | |
-| BE-22 | WebSocket endpoint (state/event messages, auth via header or query) | PLANNED | | |
-| BE-23 | Idempotency-Key handling for mutating requests | PLANNED | store part TESTED | |
-| BE-24 | CSV export (trips, charges) | PLANNED | | |
-| BE-25 | Account deletion endpoint | PLANNED | store part TESTED (`delete_user`) | App Store requirement |
-| BE-26 | Server main, graceful shutdown, Dockerfile, docker-compose | PLANNED | | |
-| BE-27 | End-to-end API test (simulator + memory store) | PLANNED | | |
-| BE-28 | Live smoke test of running server incl. WebSocket | PLANNED | | |
+| BE-16 | Realtime hub (typed messages, watcher counts) | TESTED | `go test ./internal/realtime` |  |
+| BE-17 | Ingestion manager (sleep/cost-aware polling, history seeding, poke after command) | TESTED | `TestPipelineWithSimulator` (3 simulated hours through the real poll loop); live smoke on Postgres | ADR-013; real-Tesla cadence/cost unverified |
+| BE-18 | Notification rule engine + event log | TESTED | `go test ./internal/notify` (hysteresis, left open/unlocked, geofence, rendering, per-user delivery) |  |
+| BE-19 | APNs pusher (token auth, ES256) + log pusher | TESTED (fake) | `TestAPNsSignsAndSends` verifies the ES256 provider token and 410 pruning | real APNs needs an Apple key — BLOCKED for verification |
+| BE-20 | Commands service (validation, wake-then-send, rate limit, audit) | TESTED | `go test ./internal/commands` + e2e |  |
+| BE-21 | HTTP API — every route in `docs/api.md` | TESTED | `TestEndToEnd` (every route family) + live smoke | Fleet OAuth authorize/callback only exercised on the disabled path |
+| BE-22 | WebSocket endpoint (state/event messages, auth via header or query) | VERIFIED | e2e WebSocket test + live probe (101, initial state, state + command stream) |  |
+| BE-23 | Idempotency-Key handling for mutating requests | TESTED | e2e: replay header; 422 on a reused key with a different body |  |
+| BE-24 | CSV export (trips, charges) | TESTED | e2e CSV parse; live smoke |  |
+| BE-25 | Account deletion endpoint | TESTED | e2e: delete account → 401; store conformance | App Store requirement |
+| BE-26 | Server main, graceful shutdown, Dockerfile, docker-compose | IMPLEMENTED | binary built and run; Dockerfile/compose **not run** (no Docker daemon in S01) |  |
+| BE-27 | End-to-end API test (simulator + memory store) | TESTED | `go test -race -count=10 -run TestEndToEnd ./internal/app` ×4, all pass | found + fixed a simulator data race and a seeding visibility race |
+| BE-28 | Live smoke test of running server incl. WebSocket | VERIFIED | S01: server on Postgres 16 — dev login, stats, health, commands (wake path), idempotent replay, WS probe, CSV export, zero ERROR log lines |  |
 | BE-29 | Fleet Telemetry streaming ingestion (self-hosted fleet-telemetry) | BACKLOG | | needed for cost at scale (ADR-013) |
 | BE-30 | Partner registration tooling (public key at `/.well-known/...`, `partner_accounts`) | BACKLOG | | |
 | BE-31 | Timescale continuous aggregates | BACKLOG | | |
@@ -74,5 +74,5 @@ _Last updated: S01 (2026-10-14, Claude Opus 5.5) — mid-session._
 | DOC-04 | ADRs 009–015 | PLANNED | | |
 | DOC-05 | README build/run instructions | PLANNED | | |
 | OPS-01 | GitHub Actions: Go tests + Postgres service + macOS iOS build | PLANNED | | first proof that iOS compiles |
-| OPS-02 | Push S01 work to GitHub | BLOCKED | | GitHub not linked to Claude in S01; bundle delivered instead |
+| OPS-02 | Push S01 work to GitHub | IN PROGRESS | branch `s01-build-out` pushed to GitHub | GitHub linked mid-session |
 | AND-01 | Android client | BACKLOG | | |

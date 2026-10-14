@@ -1,4 +1,6 @@
-version: "3.9"
+# Local stack: TimescaleDB + the Milesight API (simulator transport by default).
+#   docker compose up --build
+# The API applies its own migrations on start (internal/store/postgres/migrations).
 services:
   db:
     image: timescale/timescaledb:latest-pg16
@@ -10,12 +12,25 @@ services:
       - "5432:5432"
     volumes:
       - dbdata:/var/lib/postgresql/data
-      - ../docs/schema.sql:/docker-entrypoint-initdb.d/001-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U milesight"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
 
-  redis:
-    image: redis:7-alpine
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: postgres://milesight:milesight@db:5432/milesight?sslmode=disable
+      MILESIGHT_ADDR: ":8080"
     ports:
-      - "6379:6379"
+      - "8080:8080"
 
 volumes:
   dbdata:

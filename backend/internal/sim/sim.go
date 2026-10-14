@@ -251,71 +251,66 @@ func (lc *liveCar) plan() {
 	}
 }
 
-func (t *Transport) current(userID, vin string) (*liveCar, error) {
+// withCar advances the car to now and runs fn while holding the simulator lock,
+// so every read and mutation of car state is serialized.
+func (t *Transport) withCar(userID, vin string, fn func(lc *liveCar) error) error {
 	lc, err := t.find(userID, vin)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	t.mu.Lock()
 	defer t.mu.Unlock()
 	lc.tick(t.opts.Now().UTC())
-	return lc, nil
+	return fn(lc)
 }
 
 // ListVehicles returns the user's simulated fleet.
 func (t *Transport) ListVehicles(_ context.Context, userID string) ([]transport.Vehicle, error) {
 	var out []transport.Vehicle
 	for _, c := range t.fleet(userID) {
-		lc, _ := t.current(userID, c.vin)
-		out = append(out, transport.Vehicle{TeslaID: fmt.Sprint(seedFor(c.vin) % 1e9), VIN: c.vin, DisplayName: c.name,
-			State: lc.state(), Model: c.spec.model, Trim: c.spec.trim, Color: c.color})
+		err := t.withCar(userID, c.vin, func(lc *liveCar) error {
+			out = append(out, transport.Vehicle{TeslaID: fmt.Sprint(seedFor(lc.vin) % 1e9), VIN: lc.vin, DisplayName: lc.name,
+				State: lc.state(), Model: lc.spec.model, Trim: lc.spec.trim, Color: lc.color})
+			return nil
+		})
+		if err != nil {
+			return nil, err
+		}
 	}
 	return out, nil
 }
 
 // VehicleState never wakes the car.
 func (t *Transport) VehicleState(_ context.Context, userID, vin string) (string, error) {
-	lc, err := t.current(userID, vin)
-	if err != nil {
-		return "", err
-	}
-	return lc.state(), nil
+	var st string
+	err := t.withCar(userID, vin, func(lc *liveCar) error { st = lc.state(); return nil })
+	return st, err
 }
 
 // VehicleData returns the live snapshot, or ErrVehicleUnavailable when asleep.
 func (t *Transport) VehicleData(_ context.Context, userID, vin string) (*transport.Snapshot, error) {
-	lc, err := t.current(userID, vin)
-	if err != nil {
-		return nil, err
-	}
-	t.mu.Lock()
-	defer t.mu.Unlock()
-	if lc.ph == phaseAsleep {
-		return nil, transport.ErrVehicleUnavailable
-	}
-	return &transport.Snapshot{State: lc.snapshot(), DisplayName: lc.name, Model: lc.spec.model, Trim: lc.spec.trim, Color: lc.color}, nil
+	var snap *transport.Snapshot
+	err := t.withCar(userID, vin, func(lc *liveCar) error {
+		if lc.ph == phaseAsleep {
+			return transport.ErrVehicleUnavailable
+		}
+		snap = &transport.Snapshot{State: lc.snapshot(), DisplayName: lc.name, Model: lc.spec.model, Trim: lc.spec.trim, Color: lc.color}
+		return nil
+	})
+	return snap, err
 }
 
 // Wake wakes the car (it comes online immediately in the simulator).
 func (t *Transport) Wake(_ context.Context, userID, vin string) error {
-	lc, err := t.current(userID, vin)
-	if err != nil {
-		return err
-	}
-	t.mu.Lock()
-	defer t.mu.Unlock()
-	lc.wake()
-	return nil
+	return t.withCar(userID, vin, func(lc *liveCar) error { lc.wake(); return nil })
 }
 
 // Command applies a Tesla command name/body to the simulated car.
 func (t *Transport) Command(_ context.Context, userID, vin string, cmd transport.Command) error {
-	lc, err := t.current(userID, vin)
-	if err != nil {
-		return err
-	}
-	t.mu.Lock()
-	defer t.mu.Unlock()
+	return t.withCar(userID, vin, func(lc *liveCar) error { return applyCommand(lc, cmd) })
+}
+
+func applyCommand(lc *liveCar, cmd transport.Command) error {
 	if lc.ph == phaseAsleep {
 		return transport.ErrVehicleUnavailable
 	}
