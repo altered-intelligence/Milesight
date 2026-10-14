@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-14T06:16:52.595870246Z",
+  "command": "charging",
+  "reason": "not_plugged_in",
+  "request_id": "cb07cb39-9f26-44bd-8d15-35a8a8da320c",
+  "status": "failed",
+  "woke_up": false
+}

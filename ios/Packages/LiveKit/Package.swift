@@ -7,6 +7,7 @@ let package = Package(
     products: [.library(name: "LiveKit", targets: ["LiveKit"])],
     dependencies: [.package(path: "../CoreKit")],
     targets: [
-        .target(name: "LiveKit", dependencies: ["CoreKit"])
+        .target(name: "LiveKit", dependencies: ["CoreKit"]),
+        .testTarget(name: "LiveKitTests", dependencies: ["LiveKit"])
     ]
 )

@@ -1,0 +1,86 @@
+{
+  "items": [
+    {
+      "avg_speed_kph": 58.3,
+      "distance_km": 18.35,
+      "duration_s": 1134,
+      "efficiency_wh_km": 189.2,
+      "end_battery_pct": 69,
+      "end_location": {
+        "lat": 37.3947,
+        "lon": -122.15030000000002
+      },
+      "end_odometer_km": 27896.69,
+      "end_range_km": 367.54,
+      "ended_at": "2026-10-14T02:26:00Z",
+      "energy_used_kwh": 3.472,
+      "id": "33682382-54f1-4dc6-aad9-3dd5ed7a5cb7",
+      "max_speed_kph": 88.4,
+      "outside_temp_c": 18.3,
+      "start_battery_pct": 73,
+      "start_location": {
+        "lat": 37.2776650588066,
+        "lon": -122.01395991601771
+      },
+      "start_odometer_km": 27878.34,
+      "start_range_km": 392.26,
+      "started_at": "2026-10-14T02:07:06Z",
+      "vehicle_id": "fd2c9774-a5f4-4015-9d8d-b107d979c5ae"
+    },
+    {
+      "avg_speed_kph": 61.9,
+      "distance_km": 17.97,
+      "duration_s": 1045,
+      "efficiency_wh_km": 196.1,
+      "end_battery_pct": 74,
+      "end_location": {
+        "lat": 37.2776650588066,
+        "lon": -122.01395991601771
+      },
+      "end_odometer_km": 27878.34,
+      "end_range_km": 396.87,
+      "ended_at": "2026-10-13T16:26:30Z",
+      "energy_used_kwh": 3.524,
+      "id": "f5d21f1c-d90e-455e-b663-1258620f0136",
+      "max_speed_kph": 88.3,
+      "outside_temp_c": 13.2,
+      "start_battery_pct": 79,
+      "start_location": {
+        "lat": 37.3947,
+        "lon": -122.15030000000002
+      },
+      "start_odometer_km": 27860.37,
+      "start_range_km": 421.96,
+      "started_at": "2026-10-13T16:09:05Z",
+      "vehicle_id": "fd2c9774-a5f4-4015-9d8d-b107d979c5ae"
+    },
+    {
+      "avg_speed_kph": 37.6,
+      "distance_km": 5.28,
+      "duration_s": 506,
+      "efficiency_wh_km": 150.4,
+      "end_battery_pct": 57,
+      "end_location": {
+        "lat": 37.3947,
+        "lon": -122.15030000000002
+      },
+      "end_odometer_km": 27860.37,
+      "end_range_km": 305.79,
+      "ended_at": "2026-10-13T04:21:30Z",
+      "energy_used_kwh": 0.794,
+      "id": "68c2e869-801f-44ea-9aec-dc54b204b45e",
+      "max_speed_kph": 50.2,
+      "outside_temp_c": 15.5,
+      "start_battery_pct": 58,
+      "start_location": {
+        "lat": 37.43302978857134,
+        "lon": -122.11567309580226
+      },
+      "start_odometer_km": 27855.09,
+      "start_range_km": 311.44,
+      "started_at": "2026-10-13T04:13:04Z",
+      "vehicle_id": "fd2c9774-a5f4-4015-9d8d-b107d979c5ae"
+    }
+  ],
+  "next_cursor": "MjAyNi0xMC0xM1QwNDoxMzowNFo"
+}

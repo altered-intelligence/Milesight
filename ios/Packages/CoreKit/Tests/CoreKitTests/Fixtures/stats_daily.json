@@ -1,0 +1,66 @@
+{
+  "buckets": [
+    {
+      "charges": 0,
+      "charging_cost": 0,
+      "distance_km": 0,
+      "drain_km": 0,
+      "drain_kwh": 0,
+      "drive_time_s": 0,
+      "end": "2026-09-15T05:00:00Z",
+      "energy_added_kwh": 0,
+      "energy_used_kwh": 0,
+      "idle_hours": 0,
+      "start": "2026-09-14T05:00:00Z",
+      "trips": 0
+    },
+    {
+      "charges": 0,
+      "charging_cost": 0,
+      "distance_km": 0,
+      "drain_km": 0,
+      "drain_kwh": 0,
+      "drive_time_s": 0,
+      "end": "2026-09-16T05:00:00Z",
+      "energy_added_kwh": 0,
+      "energy_used_kwh": 0,
+      "idle_hours": 0,
+      "start": "2026-09-15T05:00:00Z",
+      "trips": 0
+    },
+    {
+      "charges": 0,
+      "charging_cost": 0,
+      "distance_km": 0,
+      "drain_km": 0,
+      "drain_kwh": 0,
+      "drive_time_s": 0,
+      "end": "2026-09-17T05:00:00Z",
+      "energy_added_kwh": 0,
+      "energy_used_kwh": 0,
+      "idle_hours": 0,
+      "start": "2026-09-16T05:00:00Z",
+      "trips": 0
+    }
+  ],
+  "currency": "USD",
+  "from": "2026-09-14T06:16:54.101582708Z",
+  "period": "daily",
+  "time_zone": "America/Chicago",
+  "to": "2026-10-14T06:16:54.101582708Z",
+  "totals": {
+    "charges": 6,
+    "charging_cost": 30.71,
+    "distance_km": 627.58,
+    "drain_km": 128.7,
+    "drain_kwh": 18.06,
+    "drive_time_s": 33803,
+    "efficiency_wh_km": 171.3,
+    "end": "2026-10-15T05:00:00Z",
+    "energy_added_kwh": 117.89,
+    "energy_used_kwh": 107.515,
+    "idle_hours": 203.6,
+    "start": "2026-09-14T05:00:00Z",
+    "trips": 33
+  }
+}

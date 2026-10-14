@@ -24,3 +24,6 @@ ios/.dd/
 .build/
 .swiftpm/
 Packages/**/.build/
+
+# XcodeGen output (generate with `cd ios && xcodegen generate`)
+ios/Milesight.xcodeproj/

@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "body": "Charged to 80% · 21.4 kWh added · USD 3.21",
+      "id": 1,
+      "occurred_at": "2026-10-14T06:16:54.109478424Z",
+      "payload": {
+        "battery_pct": 80,
+        "charge_id": "d44a40ad-e122-4d88-ad22-3afa3738651e",
+        "cost": 3.21,
+        "currency": "USD",
+        "deep_link": "milesight://vehicle/fd2c9774-a5f4-4015-9d8d-b107d979c5ae/charges/d44a40ad-e122-4d88-ad22-3afa3738651e",
+        "duration_s": 5400,
+        "energy_kwh": 21.4,
+        "limit_pct": 80
+      },
+      "title": "Midnight finished charging",
+      "type": "charge_complete",
+      "vehicle_id": "fd2c9774-a5f4-4015-9d8d-b107d979c5ae"
+    }
+  ]
+}

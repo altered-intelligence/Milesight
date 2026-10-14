@@ -1,0 +1,16 @@
+{
+  "degradation_pct": 0,
+  "estimated_capacity_kwh": 74.9,
+  "full_range_km": 534,
+  "history": [
+    {
+      "capacity_kwh": 74.9,
+      "full_range_km": 534,
+      "month": "2026-10-01T00:00:00Z",
+      "samples": 13
+    }
+  ],
+  "nominal_capacity_kwh": 75,
+  "nominal_full_range_km": 534,
+  "samples": 7
+}

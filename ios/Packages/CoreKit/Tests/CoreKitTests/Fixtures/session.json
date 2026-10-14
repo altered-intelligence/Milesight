@@ -1,0 +1,22 @@
+{
+  "access_token": "eyJhbGciOiJIUzI1NiJ9.fixture.signature",
+  "expires_at": "2026-10-14T06:31:52.540358517Z",
+  "expires_in": 900,
+  "refresh_token": "fixture-refresh-token",
+  "token_type": "Bearer",
+  "user": {
+    "created_at": "2026-10-14T06:16:52.540258918Z",
+    "email": "fixtures@example.com",
+    "id": "4943ff91-5498-4aa7-9422-bcd46939ef1f",
+    "plan": "free",
+    "preferences": {
+      "currency": "USD",
+      "distance_unit": "mi",
+      "energy_rate_per_kwh": 0.15,
+      "fast_charge_rate_per_kwh": 0.45,
+      "temperature_unit": "f",
+      "time_zone": "UTC"
+    },
+    "transport": "sim"
+  }
+}

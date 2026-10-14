@@ -1,0 +1,50 @@
+{
+  "battery": {
+    "charge_limit_pct": 80,
+    "charge_port_open": false,
+    "charge_state": "disconnected",
+    "est_range_km": 328.94,
+    "ideal_range_km": 380.11,
+    "percent": 68,
+    "plugged_in": false,
+    "range_km": 365.49,
+    "usable_percent": 68
+  },
+  "climate": {
+    "defrost_on": false,
+    "driver_set_c": 21.5,
+    "fan_status": 4,
+    "inside_temp_c": 12.4,
+    "on": true,
+    "outside_temp_c": 12.4,
+    "passenger_set_c": 21.5,
+    "preconditioning": true
+  },
+  "closures": {
+    "doors_open": false,
+    "frunk_open": false,
+    "locked": true,
+    "sentry_mode": false,
+    "trunk_open": false,
+    "user_present": false,
+    "windows_open": false
+  },
+  "drive": {
+    "power_kw": 0,
+    "shift_state": "P",
+    "speed_kph": 0
+  },
+  "location": {
+    "heading_deg": 0,
+    "lat": 37.3947,
+    "lon": -122.1503
+  },
+  "odometer_km": 27896.69,
+  "software": {
+    "update_available": false,
+    "version": "2025.38.6"
+  },
+  "state": "online",
+  "updated_at": "2026-10-14T06:16:53.596220397Z",
+  "vehicle_id": "fd2c9774-a5f4-4015-9d8d-b107d979c5ae"
+}

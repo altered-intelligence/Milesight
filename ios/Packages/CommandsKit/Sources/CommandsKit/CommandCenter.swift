@@ -1,37 +1,53 @@
 import Foundation
+import Observation
 import CoreKit
-import Combine
+import LiveKit
 
-/// Command surface with optimistic updates + rollback. Sends the intent
-/// immediately, then reconciles with authoritative server state.
+/// Sends commands with optimistic UI: the expected change shows immediately,
+/// is held against stale reads while the car confirms, and rolls back on failure.
 @MainActor
 @Observable
 public final class CommandCenter {
-    public enum CommandKind: String, Sendable {
-        case climate
-        case lock
-        case unlock
-        case frunk
-        case trunk
-        case chargePort
-        case chargePortClose = "charge_port_close"
-        case honk
-        case flashLights = "flash_lights"
+    public private(set) var inFlight: [String: Set<String>] = [:] // vehicleID -> command names
+    public private(set) var lastResult: CommandResult?
+    public var lastError: MilesightError?
+
+    @ObservationIgnored private let api: APIClient
+    @ObservationIgnored private let store: VehicleStore
+
+    public init(api: APIClient, store: VehicleStore) {
+        self.api = api
+        self.store = store
     }
 
-    public private(set) var pending: [String: CommandKind] = [:] // vehicleID -> command
-    private let client: APIClient
+    public func isSending(_ command: VehicleCommand, on vehicleID: String) -> Bool {
+        inFlight[vehicleID]?.contains(command.name) ?? false
+    }
 
-    public init(client: APIClient) { self.client = client }
+    public func isBusy(_ vehicleID: String) -> Bool { !(inFlight[vehicleID]?.isEmpty ?? true) }
 
-    /// Fire-and-forget command with optimistic tracking; state reconciliation
-    /// is driven by the live stream in LiveKit.
-    public func send(vehicleID: String, kind: CommandKind) async throws {
-        pending[vehicleID] = kind
-        defer { pending[vehicleID] = nil }
-        let _: CommandResponse = try await client.post(
-            APIRouter.command(vehicleID: vehicleID, name: kind.rawValue), body: EmptyBody())
+    /// Sends a command; returns true on success. Errors land in `lastError`.
+    @discardableResult
+    public func send(_ command: VehicleCommand, to vehicleID: String) async -> Bool {
+        inFlight[vehicleID, default: []].insert(command.name)
+        defer { inFlight[vehicleID]?.remove(command.name) }
+
+        let previous = store.state(for: vehicleID)
+        let overlay = store.addOverlay(vehicleID, for: 20) { command.applyOptimistically(&$0) }
+        do {
+            let result: CommandResult = try await api.send(.command(vehicleID, name: command.name, body: command.body))
+            lastResult = result
+            lastError = nil
+            return true
+        } catch let e as MilesightError {
+            store.removeOverlay(vehicleID, token: overlay, restoring: previous)
+            lastError = e
+            if case .commandRefused(let r) = e { lastResult = r }
+            return false
+        } catch {
+            store.removeOverlay(vehicleID, token: overlay, restoring: previous)
+            lastError = .network(error.localizedDescription)
+            return false
+        }
     }
 }
-
-private struct EmptyBody: Encodable {}

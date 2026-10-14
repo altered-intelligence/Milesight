@@ -1,0 +1,74 @@
+{
+  "items": [
+    {
+      "avg_power_kw": 12,
+      "charger_type": "ac",
+      "cost": 2.58,
+      "currency": "USD",
+      "duration_s": 5400,
+      "end_battery_pct": 80,
+      "end_range_km": 427.19,
+      "end_reason": "complete",
+      "ended_at": "2026-10-13T07:09:00Z",
+      "energy_added_kwh": 17.18,
+      "fast_charger": false,
+      "id": "d44a40ad-e122-4d88-ad22-3afa3738651e",
+      "location": {
+        "lat": 37.3947,
+        "lon": -122.15030000000002
+      },
+      "max_power_kw": 12,
+      "start_battery_pct": 57,
+      "start_range_km": 304.92,
+      "started_at": "2026-10-13T05:39:00Z",
+      "vehicle_id": "fd2c9774-a5f4-4015-9d8d-b107d979c5ae"
+    },
+    {
+      "avg_power_kw": 69,
+      "charger_type": "Tesla",
+      "cost": 11.33,
+      "currency": "USD",
+      "duration_s": 1230,
+      "end_battery_pct": 80,
+      "end_range_km": 427.19,
+      "end_reason": "complete",
+      "ended_at": "2026-10-11T22:19:00Z",
+      "energy_added_kwh": 25.17,
+      "fast_charger": true,
+      "id": "6bb8e9df-f5ae-4cde-a775-185fbb404aaf",
+      "location": {
+        "lat": 37.26979316053147,
+        "lon": -122.55035594553465
+      },
+      "max_power_kw": 112,
+      "start_battery_pct": 49,
+      "start_range_km": 262.33,
+      "started_at": "2026-10-11T21:58:30Z",
+      "vehicle_id": "fd2c9774-a5f4-4015-9d8d-b107d979c5ae"
+    },
+    {
+      "avg_power_kw": 62.2,
+      "charger_type": "Tesla",
+      "cost": 8.21,
+      "currency": "USD",
+      "duration_s": 990,
+      "end_battery_pct": 80,
+      "end_range_km": 427.2,
+      "end_reason": "complete",
+      "ended_at": "2026-10-10T21:45:00Z",
+      "energy_added_kwh": 18.24,
+      "fast_charger": true,
+      "id": "da5c3c5a-7eff-4129-9846-2806148b1a21",
+      "location": {
+        "lat": 37.26979316053147,
+        "lon": -122.55035594553465
+      },
+      "max_power_kw": 88,
+      "start_battery_pct": 58,
+      "start_range_km": 308.15,
+      "started_at": "2026-10-10T21:28:30Z",
+      "vehicle_id": "fd2c9774-a5f4-4015-9d8d-b107d979c5ae"
+    }
+  ],
+  "next_cursor": "MjAyNi0xMC0xMFQyMToyODozMFo"
+}

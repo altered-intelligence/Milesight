@@ -9,6 +9,11 @@ let package = Package(
     ],
     targets: [
         .target(name: "CoreKit"),
-        .testTarget(name: "CoreKitTests", dependencies: ["CoreKit"])
+        .testTarget(
+            name: "CoreKitTests",
+            dependencies: ["CoreKit"],
+            // Real server responses captured by `go run ./cmd/fixtures` (backend).
+            resources: [.copy("Fixtures")]
+        )
     ]
 )

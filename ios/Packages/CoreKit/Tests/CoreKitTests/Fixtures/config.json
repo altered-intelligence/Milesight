@@ -1,0 +1,12 @@
+{
+  "dev_login": true,
+  "owner_token_login": false,
+  "regions": [
+    "na",
+    "eu",
+    "cn"
+  ],
+  "tesla_oauth": false,
+  "transport": "sim",
+  "version": "fixtures"
+}

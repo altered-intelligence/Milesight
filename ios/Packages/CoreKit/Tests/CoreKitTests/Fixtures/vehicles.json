@@ -1,0 +1,132 @@
+{
+  "vehicles": [
+    {
+      "color": "MidnightSilver",
+      "display_name": "Midnight",
+      "id": "fd2c9774-a5f4-4015-9d8d-b107d979c5ae",
+      "last_seen": "2026-10-14T06:16:53.596220397Z",
+      "latest": {
+        "battery": {
+          "charge_limit_pct": 80,
+          "charge_port_open": false,
+          "charge_state": "disconnected",
+          "est_range_km": 328.94,
+          "ideal_range_km": 380.11,
+          "percent": 68,
+          "plugged_in": false,
+          "range_km": 365.49,
+          "usable_percent": 68
+        },
+        "climate": {
+          "defrost_on": false,
+          "driver_set_c": 21.5,
+          "fan_status": 4,
+          "inside_temp_c": 12.4,
+          "on": true,
+          "outside_temp_c": 12.4,
+          "passenger_set_c": 21.5,
+          "preconditioning": true
+        },
+        "closures": {
+          "doors_open": false,
+          "frunk_open": false,
+          "locked": true,
+          "sentry_mode": false,
+          "trunk_open": false,
+          "user_present": false,
+          "windows_open": false
+        },
+        "drive": {
+          "power_kw": 0,
+          "shift_state": "P",
+          "speed_kph": 0
+        },
+        "location": {
+          "heading_deg": 0,
+          "lat": 37.3947,
+          "lon": -122.1503
+        },
+        "odometer_km": 27896.69,
+        "software": {
+          "update_available": false,
+          "version": "2025.38.6"
+        },
+        "state": "online",
+        "updated_at": "2026-10-14T06:16:53.596220397Z",
+        "vehicle_id": "fd2c9774-a5f4-4015-9d8d-b107d979c5ae"
+      },
+      "model": "Model 3",
+      "region": "na",
+      "role": "owner",
+      "state": "online",
+      "sync_status": "polling",
+      "trim": "Long Range AWD",
+      "vin": "5YJ3E1EAR2MAEEVHS"
+    },
+    {
+      "color": "PearlWhite",
+      "display_name": "Pearl",
+      "id": "81a732fe-cc56-4889-b63a-4eae433e3c3c",
+      "last_seen": "2026-10-14T06:02:00Z",
+      "latest": {
+        "battery": {
+          "charge_limit_pct": 80,
+          "charge_port_open": false,
+          "charge_state": "disconnected",
+          "est_range_km": 323.13,
+          "ideal_range_km": 373.39,
+          "percent": 72,
+          "plugged_in": false,
+          "range_km": 359.03,
+          "usable_percent": 72
+        },
+        "climate": {
+          "defrost_on": false,
+          "driver_set_c": 21,
+          "fan_status": 0,
+          "inside_temp_c": 17.9,
+          "on": false,
+          "outside_temp_c": 12.8,
+          "passenger_set_c": 21,
+          "preconditioning": false
+        },
+        "closures": {
+          "doors_open": false,
+          "frunk_open": false,
+          "locked": true,
+          "sentry_mode": false,
+          "trunk_open": false,
+          "user_present": false,
+          "windows_open": false
+        },
+        "drive": {
+          "power_kw": 0,
+          "shift_state": "P",
+          "speed_kph": 0
+        },
+        "location": {
+          "heading_deg": 138,
+          "lat": 37.39469999999999,
+          "lon": -122.15030000000002
+        },
+        "odometer_km": 19373.84,
+        "software": {
+          "update_available": true,
+          "update_status": "available",
+          "update_version": "2025.44.2",
+          "version": "2025.38.6"
+        },
+        "state": "asleep",
+        "updated_at": "2026-10-14T06:02:00Z",
+        "vehicle_id": "81a732fe-cc56-4889-b63a-4eae433e3c3c"
+      },
+      "model": "Model Y",
+      "region": "na",
+      "role": "owner",
+      "state": "asleep",
+      "sync_status": "idle",
+      "trim": "Long Range AWD",
+      "vin": "7SAYGDEED8DEN89V2"
+    }
+  ]
+}

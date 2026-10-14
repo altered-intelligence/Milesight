@@ -7,6 +7,7 @@ let package = Package(
     products: [.library(name: "AnalyticsKit", targets: ["AnalyticsKit"])],
     dependencies: [.package(path: "../CoreKit")],
     targets: [
-        .target(name: "AnalyticsKit", dependencies: ["CoreKit"])
+        .target(name: "AnalyticsKit", dependencies: ["CoreKit"]),
+        .testTarget(name: "AnalyticsKitTests", dependencies: ["AnalyticsKit"])
     ]
 )
