@@ -39,3 +39,14 @@ open Milesight.xcodeproj
 ```
 Swift packages can be checked individually: `cd ios/Packages/CoreKit && swift test`.
 The app talks to `http://localhost:8080` by default in Debug (configurable in Settings).
+
+## CI
+`.github/workflows/ci.yml` — backend job (gofmt, vet, `go test -race` against a TimescaleDB
+service with `MILESIGHT_EXPECT_TIMESCALE=1`, fixture generator, server + Docker build) and iOS
+job on `macos-15` (`swift test` per kit, `xcodegen generate`, unsigned simulator build).
+If job logs can't be downloaded from your environment, read step outcomes with:
+`gh api repos/altered-intelligence/Milesight/actions/jobs/<job-id> --jq '.steps[] | "\(.name) \(.conclusion)"'`.
+
+## Regenerating client fixtures
+After any API change: `cd backend && go run ./cmd/fixtures -out ../ios/Packages/CoreKit/Tests/CoreKitTests/Fixtures`
+then update Swift models until `swift test` in `ios/Packages/CoreKit` passes.

@@ -63,21 +63,26 @@ macOS build (CI or Xcode) succeeds; record the run as evidence.
 ```
 
 ## 2. Current snapshot
-_Last updated: S01, 2026-10-14, Claude Opus 5.5 (in progress)._
+_Last updated: end of S01, 2026-10-14, Claude Opus 5.5._
 
-- **Shape:** native iOS app (SwiftUI) + Go backend; Android later; web dashboard optional.
-- **Backend:** being rebuilt from stubs into a working service. Stores (memory + Postgres),
-  auth, Tesla Fleet/Owner transports, simulator, and analytics are written and **TESTED**.
-  Ingestion, notifications, commands and the HTTP/WebSocket API are next (see ledger).
-- **iOS:** still the original scaffold; client and screens not yet updated to the new API.
-- **Repo state:** GitHub is not linked to the S01 workspace, so S01 work is committed
-  locally and delivered as a git bundle; it is not on GitHub until someone pushes it.
+- **Shape:** native iOS app (SwiftUI, iOS 17+) + Go backend; Android later; web optional.
+- **Backend: feature-complete for the MVP and proven.** Auth, Tesla Fleet/Owner transports,
+  vehicle simulator, sleep/cost-aware ingestion, trip/charge detection, stats, battery health,
+  notifications + APNs, commands, full v1 API + WebSocket. Tested locally (race, Postgres) and in
+  CI (TimescaleDB); live-smoke-verified. Real Tesla and real APNs are **unverified (blocked on
+  accounts/keys)**.
+- **iOS: built, not yet run.** Kits are unit-tested in CI against real server fixtures; the app
+  compiles in CI, but no one has looked at the UI yet.
+- **Repo:** `main` = end of S01; CI (`.github/workflows/ci.yml`) is the compile/test gate for
+  everything, including Swift.
 
 ## 3. Exact next steps
-See the newest session log for the authoritative list. At the time of writing:
-1. Finish backend: realtime hub, ingestion manager, notifications/APNs, commands, API, server main.
-2. End-to-end API test (simulator + memory store) and live smoke test incl. WebSocket.
-3. Update iOS kits/screens to the contract in `docs/api.md`; get them compiling in CI.
+1. **IOS-14** — run the app in the iOS Simulator against `cd backend && go run ./cmd/server`
+   (tap "Start demo"), walk every screen, file defects in the ledger, fix them.
+2. **BE-29** — Fleet Telemetry streaming ingestion (production cost; ADR-013).
+3. Obtain a Tesla developer app to unblock BE-08 / BE-10 / BE-36 (real OAuth, real data).
+4. IOS-15 icon/assets → IOS-16 offline cache → IOS-13 widgets.
+Details and rationale: newest session log.
 
 ## 4. Where things are
 - `docs/handoff/LEDGER.md` — every work item, status, evidence.
