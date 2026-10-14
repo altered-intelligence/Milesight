@@ -1,45 +1,78 @@
 # Milesight
 
-A Tesla companion app — real-time fleet monitoring, deep battery
-& charging analytics, automatic trip logging, remote commands, notifications, and dashboards.
+A Tesla companion app: real-time vehicle status, remote commands, automatic trip and charging
+logs, cost tracking, efficiency and battery-health insights, and smart notifications.
+
+- **iOS app** (SwiftUI, iOS 17+) — the product.
+- **Go backend** — talks to Tesla, stores history, runs analytics, pushes live updates over
+  WebSocket and notifications over APNs.
+- **Android** (Kotlin/Compose) is planned against the same API; a web dashboard is optional.
+
+> New here — human or AI? Read [`HANDOFF.md`](HANDOFF.md) first. Work is tracked item by item in
+> [`docs/handoff/LEDGER.md`](docs/handoff/LEDGER.md); only items marked TESTED/VERIFIED are done.
+
+## Try it in two minutes (no Tesla account needed)
+
+```sh
+cd backend
+go run ./cmd/server          # simulator + in-memory store on :8080
+```
+Then either open the iOS app in the Simulator (below) and tap **Start demo**, or use the API:
+```sh
+curl -s -X POST localhost:8080/v1/auth/dev/login -d '{"email":"me@example.com"}'
+```
+Each demo account gets two simulated cars with a month of drives and charging history; the cars
+keep driving, charging and sleeping in real time and respond to commands.
+
+## iOS app
+
+```sh
+brew install xcodegen
+cd ios && xcodegen generate && open Milesight.xcodeproj
+```
+Run the **Milesight** scheme on an iPhone simulator. Debug builds point at `http://localhost:8080`
+(change the server on the sign-in screen). To run on a device, set your team under Signing.
+
+Screens: sign-in · vehicle dashboard (battery, range, live drive/charge, quick actions, climate,
+map) · controls · drives (route map, speed) · charging (power curve, cost) · insights
+(daily/weekly/monthly) · battery health · alerts and notification rules · places · settings.
+
+## Backend
+
+| | |
+|---|---|
+| Run with Postgres | `cd backend && docker compose up --build` (TimescaleDB + API) |
+| Tests | `go test ./...` · Postgres suite: set `MILESIGHT_TEST_DATABASE_URL` (see `Makefile`) |
+| Config | every variable is documented in [`backend/.env.example`](backend/.env.example) |
+| API contract | [`docs/api.md`](docs/api.md) |
+
+Transports (ADR-003): `sim` (default, development), `owner` (legacy Owner API, development only),
+`fleet` (official Tesla Fleet API, production). Production needs a Tesla developer app, a
+registered partner domain with your public key, a virtual key paired to each car, and Tesla's
+vehicle-command proxy for signed commands (`TESLA_COMMAND_PROXY_URL`).
+
+## Repository layout
+```
+backend/            Go service
+  cmd/server        API server binary
+  cmd/fixtures      captures real API responses as iOS contract-test fixtures
+  internal/         api · auth · analytics · commands · ingest · notify · realtime · sim
+                    store (memory + postgres) · tesla (Fleet/Owner REST, OAuth) · models
+ios/
+  App/              SwiftUI app target
+  Packages/         CoreKit (models, API client, WebSocket) · LiveKit (vehicle store)
+                    CommandsKit · AnalyticsKit · NotificationsKit
+  project.yml       XcodeGen spec
+docs/               plan · decisions (ADRs) · api · iOS architecture · handoff/
+```
 
 ## Status
-Planning/documentation phase. iOS native (SwiftUI) first; Android (Kotlin/Compose) as a follow-on.
+See [`HANDOFF.md`](HANDOFF.md) §2 for the current snapshot and
+[`docs/handoff/LEDGER.md`](docs/handoff/LEDGER.md) for item-level status and evidence.
 
-## Highlights
-- **Real-time fleet monitoring** across all your vehicles.
-- **Battery & charging analytics** — deep insights into charge curves, efficiency, and range.
-- **Automatic trip logging** — no manual tracking.
-- **Remote commands** and **notifications** from a clean dashboard.
-
-## Architecture
-- **Transports:** production uses the official Tesla **Fleet API**; the legacy Owner API is
-  used only for dev/bootstrap, both behind a pluggable `TeslaTransport` abstraction.
-- **Backend:** Go (streaming-first: Fleet streaming telemetry + WebSocket push over polling).
-- **Data:** PostgreSQL for entities + TimescaleDB for telemetry hypertables.
-
-## Docs
-- `docs/plan.md` — product & engineering plan
-- `docs/decisions.md` — ADR log (product name, transports, backend, storage)
-- `docs/api.md` — public API spec
-- `docs/schema.sql` — data model
-- `docs/ios-architecture.md` — iOS architecture notes
+## Notes
+Milesight is not affiliated with Tesla, Inc. Tesla and its marks belong to Tesla, Inc. Use of the
+Tesla Fleet API is subject to Tesla's developer terms; API usage is billed by Tesla.
 
 ## License
 TBD
-
-## Project structure
-- `backend/` — Go API server (contract-first, mirrors `docs/api.md`):
-  `cmd/server`, `internal/api`, `internal/models`, `internal/transport`
-  (`owner`/`fleet` adapters), `internal/store`, `internal/realtime` (WebSocket hub).
-  Includes `docker-compose.yml` (TimescaleDB + Redis) and `Makefile`.
-- `ios/Packages/` — SwiftPM kits: `CoreKit` (typed API client + models + WebSocket),
-  `LiveKit` (live vehicle store), `AnalyticsKit` (Swift Charts data), `CommandsKit`
-  (optimistic commands), `NotificationsKit` (push/deep links).
-- `ios/App/` — SwiftUI app target (generate with XcodeGen via `ios/project.yml`).
-- `docs/` — plan, ADRs, API spec, schema, iOS architecture.
-
-## Build
-- Backend: `cd backend && cp .env.example .env && go run ./cmd/server` (requires Go + Docker).
-- iOS packages (validate standalone): `cd ios/Packages/CoreKit && swift build` then
-  `swift test`. Generate the app project: `brew install xcodegen && cd ios && xcodegen generate`.

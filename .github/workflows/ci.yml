@@ -27,8 +27,8 @@ jobs:
       run:
         working-directory: backend
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
         with:
           go-version-file: backend/go.mod
           cache-dependency-path: backend/go.sum
@@ -39,6 +39,7 @@ jobs:
       - name: Test (race, incl. Postgres + Timescale conformance)
         env:
           MILESIGHT_TEST_DATABASE_URL: postgres://milesight:milesight@localhost:5432/milesight?sslmode=disable
+          MILESIGHT_EXPECT_TIMESCALE: "1"
         run: go test -race -count=1 ./...
       - name: Fixture generator runs
         # Client contract fixtures (ios/.../Fixtures) are produced by this command.
@@ -52,7 +53,7 @@ jobs:
     name: iOS (packages + app build)
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Toolchain
         run: xcodebuild -version && swift --version
       - name: Package tests

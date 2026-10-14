@@ -56,6 +56,9 @@ func TestConformance(t *testing.T) {
 		if err := s.Migrate(ctx); err != nil {
 			t.Fatal(err)
 		}
+		if os.Getenv("MILESIGHT_EXPECT_TIMESCALE") == "1" {
+			assertHypertable(t, u.String())
+		}
 		t.Cleanup(func() {
 			s.Close()
 			c, err := pgx.ConnectConfig(context.Background(), mustParse(t, admin))
@@ -68,6 +71,24 @@ func TestConformance(t *testing.T) {
 		})
 		return s
 	})
+}
+
+// assertHypertable proves migration 0002 took the TimescaleDB branch.
+func assertHypertable(t *testing.T, url string) {
+	t.Helper()
+	conn, err := pgx.Connect(context.Background(), url)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer conn.Close(context.Background())
+	var n int
+	if err := conn.QueryRow(context.Background(),
+		`SELECT count(*) FROM timescaledb_information.hypertables WHERE hypertable_name = 'telemetry'`).Scan(&n); err != nil {
+		t.Fatalf("timescale expected but not active: %v", err)
+	}
+	if n != 1 {
+		t.Fatalf("telemetry is not a hypertable")
+	}
 }
 
 func mustParse(t *testing.T, url string) *pgx.ConnConfig {
