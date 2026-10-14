@@ -77,7 +77,7 @@ _Last updated: end of S01 (2026-10-14, Claude Opus 5.5)._
 
 | ID | Item | Status | Evidence | Notes |
 |---|---|---|---|---|
-| DOC-01 | Remove all Tessie references; reword | TESTED | `grep -rni tessie .` → no matches (excl. `.git`) | older commits still contain it |
+| DOC-01 | Remove all references to a third-party companion app's name; reword | TESTED | the removed term (see the `docs/` diff in commit `edb8927`) has no matches in the working tree | older commits still contain it; never reintroduce it |
 | DOC-02 | Handoff protocol + ledger + session logs | TESTED | HANDOFF.md protocol + ledger + S01 session log in repo | keep updated every session |
 | DOC-03 | `docs/api.md` matches implemented contract | TESTED | contract fixtures + Swift contract tests enforce it | update api.md in the same change as any API change |
 | DOC-04 | ADRs 009–015 | TESTED | `docs/decisions.md` ADR-009…015 |  |

@@ -38,7 +38,7 @@ xcodegen generate            # regenerates Milesight.xcodeproj from project.yml
 open Milesight.xcodeproj
 ```
 Swift packages can be checked individually: `cd ios/Packages/CoreKit && swift test`.
-The app talks to `http://localhost:8080` by default in Debug (configurable in Settings).
+The app talks to `http://localhost:8080` by default in Debug (change it on the sign-in screen).
 
 ## CI
 `.github/workflows/ci.yml` — backend job (gofmt, vet, `go test -race` against a TimescaleDB
