@@ -1,7 +1,7 @@
 # iOS App Architecture (SwiftUI — flagship)
 
 ## Module layout (Swift Package / Xcode targets)
-- **App (Xcode target `TeslaCloneApp`)** — SwiftUI entry, scene, weight/deep-link routing.
+- **App (Xcode target `Milesight`)** — SwiftUI entry, scene, weight/deep-link routing.
 - **CoreKit (package)** — networking, auth/session, models, WebSocket client, caching,
   concurrency primitives. Shared and reusable; the typed API client mirrors `docs/api.md`.
 - **LiveKit** — live-status state machine (drives via WebSocket deltas), vehicle store.
@@ -31,7 +31,7 @@
 8. **Notifications / Rules** — event feed + rule toggles.
 9. **Settings & Account** — plans/billing, vehicles, data export + delete, sign out.
 
-## UX/responsiveness principles (matches the "Tessie-like" feel)
+## UX/responsiveness principles
 - Live state is **push-driven** (WebSocket) with a low-frequency refresh fallback — the app
   feels instant, not polled.
 - Optimistic command UI: show intent immediately, reconcile with authoritative server deltas.
@@ -41,7 +41,7 @@
 ## Push & background
 - APNs registration; store token server-side (`POST /v1/push/devices`).
 - Handle background refresh + silent pushes for state updates; WidgetKit timeline refresh.
-- Deep links: `teslaclone://vehicle/{id}` → specific screen.
+- Deep links: `milesight://vehicle/{id}` → specific screen.
 
 ## App Store readiness (commercial)
 - Privacy nutrition labels (location, telemetry, identifiers).

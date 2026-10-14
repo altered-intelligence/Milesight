@@ -1,6 +1,6 @@
 # Milesight — Tesla Companion App (Product & Engineering Plan)
 
-A working plan for a commercial Tesla companion app reproducing the core of Tessie:
+A working plan for a commercial Tesla companion app built around
 real-time fleet monitoring, deep battery/charging analytics, automatic trip logging,
 remote commands, notifications, and dashboards.
 
@@ -15,7 +15,8 @@ remote commands, notifications, and dashboards.
   viable alternative if you want one typed language across backend + web.
 - **Live-data architecture: streaming-first.** Fleet API streaming telemetry + WebSocket push
   to clients, so the app is reactive rather than poll-based.
-- **Scope is "Tessie-like features," not its branding/UI.** Review Tesla's third-party dev terms.
+- **Original product.** Milesight's features, UI, branding and assets are its own; nothing is
+  copied from other companion apps. Review Tesla's third-party dev terms.
 
 Scoped in phases so you can ship a usable MVP, then add analytics. Supporting docs:
 - `docs/decisions.md` — recorded decisions + rationale
@@ -42,7 +43,7 @@ Scoped in phases so you can ship a usable MVP, then add analytics. Supporting do
 - Automatic trip logging (distance, duration, energy, efficiency Wh/mi, route).
 - Efficiency / "ghost" graph and battery-health estimate.
 
-### Tier 3 — Deep analytics & dashboards (Tessie-style)
+### Tier 3 — Deep analytics & dashboards
 - Range & efficiency dashboards by day/week/month; temp/speed correlation.
 - Charging cost estimator (configurable rates + location rules).
 - Sleep/awake & vampire-drain tracking.

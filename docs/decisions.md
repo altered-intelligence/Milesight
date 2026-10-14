@@ -35,13 +35,13 @@ Status: Draft — confirm in review.
   Fleet client-credentials + per-user consent. Roles/plans come with commercial billing.
 
 ## ADR-007 — Scope boundary
-- **Decision:** Deliver "Tessie-like" features/UX; do NOT copy Tessie branding, logos, or
-  copyrighted UI/assets. Review Tesla third-party dev terms before launch.
+- **Decision:** Milesight's features, UX, branding and assets are original. Do not copy any
+  other companion app's branding, logos, or copyrighted UI/assets. Review Tesla third-party
+  dev terms (and Tesla trademark guidelines) before launch.
 
 ## ADR-008 — Product name: Milesight
 - **Context:** needed an original product name that signals driving/trip analytics and
-  telemetry without colliding with "Tessie" or Tesla product branding.
+  telemetry without colliding with Tesla product branding or existing companion apps.
 - **Decision:** Name the product **Milesight**. Runner-up was **Chargebook** (battery/charging
   angle) if the analytics focus shifts later.
-- **Consequence:** Use "Milesight" for all branding, store listings, and code identifiers; keep
-  the docs' "Tessie-like" phrasing strictly for feature comparison, not naming.
+- **Consequence:** Use "Milesight" for all branding, store listings, and code identifiers.

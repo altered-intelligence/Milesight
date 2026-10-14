@@ -1,4 +1,4 @@
--- Tesla clone — Postgres (entities) + Timescale (telemetry) schema
+-- Milesight — Postgres (entities) + Timescale (telemetry) schema
 -- Timescale required for hypertables/continuous aggregates/compression.
 
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";

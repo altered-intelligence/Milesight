@@ -1,6 +1,6 @@
 # Milesight
 
-A Tesla companion app with "Tessie-like" features — real-time fleet monitoring, deep battery
+A Tesla companion app — real-time fleet monitoring, deep battery
 & charging analytics, automatic trip logging, remote commands, notifications, and dashboards.
 
 ## Status
