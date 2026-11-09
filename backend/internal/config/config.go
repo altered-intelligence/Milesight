@@ -155,6 +155,12 @@ func Load() (Config, error) {
 		c.Insecure = true
 	}
 
+	if c.Transport != "sim" && c.Insecure {
+		return c, errors.New("real Tesla transports require independent JWT_SECRET and MILESIGHT_ENCRYPTION_KEY")
+	}
+	if c.Transport != "sim" && c.DevLogin {
+		return c, errors.New("development login is restricted to simulator transport")
+	}
 	if c.Transport == "fleet" {
 		if c.Tesla.ClientID == "" || c.Tesla.ClientSecret == "" {
 			return c, errors.New("fleet transport requires TESLA_CLIENT_ID and TESLA_CLIENT_SECRET")
