@@ -7,7 +7,7 @@ import (
 )
 
 func setenv(t *testing.T, kv map[string]string) {
-	for _, k := range []string{"MILESIGHT_TRANSPORT", "MILESIGHT_STORE", "DATABASE_URL", "JWT_SECRET", "MILESIGHT_ENCRYPTION_KEY",
+	for _, k := range []string{"MILESIGHT_OWNER_LOGIN", "MILESIGHT_TRANSPORT", "MILESIGHT_STORE", "DATABASE_URL", "JWT_SECRET", "MILESIGHT_ENCRYPTION_KEY",
 		"TESLA_CLIENT_ID", "TESLA_CLIENT_SECRET", "TESLA_REGION", "TESLA_SCOPES", "MILESIGHT_DEV_LOGIN", "MILESIGHT_PUBLIC_URL", "TESLA_REDIRECT_URI"} {
 		t.Setenv(k, "")
 	}
@@ -81,6 +81,18 @@ func TestOwnerRejectsDevelopmentKeys(t *testing.T) {
 		setenv(t, kv)
 		if _, err := Load(); err == nil {
 			t.Fatal("owner mode accepted incomplete production keys")
+		}
+	}
+}
+
+func TestSimulatorCannotEnableRealOAuthWithDevelopmentKeys(t *testing.T) {
+	for _, kv := range []map[string]string{
+		{"MILESIGHT_OWNER_LOGIN": "true"},
+		{"TESLA_CLIENT_ID": "test-client", "TESLA_CLIENT_SECRET": "test-secret"},
+	} {
+		setenv(t, kv)
+		if _, err := Load(); err == nil {
+			t.Fatal("real OAuth accepted development keys under simulator transport")
 		}
 	}
 }
