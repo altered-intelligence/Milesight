@@ -76,3 +76,5 @@ Tesla Fleet API is subject to Tesla's developer terms; API usage is billed by Te
 
 ## License
 TBD
+
+Security: real Tesla transports require independent `JWT_SECRET` and `MILESIGHT_ENCRYPTION_KEY`; development login is simulator-only. Set `POSTGRES_PASSWORD` before starting Compose. Published ports bind localhost. Existing databases require separate password rotation. Backend builds require Go 1.26 or later.

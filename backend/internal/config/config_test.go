@@ -71,3 +71,16 @@ func TestValidation(t *testing.T) {
 		}
 	}
 }
+
+func TestOwnerRejectsDevelopmentKeys(t *testing.T) {
+	for _, kv := range []map[string]string{
+		{"MILESIGHT_TRANSPORT": "owner"},
+		{"MILESIGHT_TRANSPORT": "owner", "JWT_SECRET": "independent-production-signing-key"},
+		{"MILESIGHT_TRANSPORT": "owner", "MILESIGHT_ENCRYPTION_KEY": base64.StdEncoding.EncodeToString([]byte(strings.Repeat("k", 32)))},
+	} {
+		setenv(t, kv)
+		if _, err := Load(); err == nil {
+			t.Fatal("owner mode accepted incomplete production keys")
+		}
+	}
+}
