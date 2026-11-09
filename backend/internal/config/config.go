@@ -155,7 +155,7 @@ func Load() (Config, error) {
 		c.Insecure = true
 	}
 
-	if c.Transport != "sim" && c.Insecure {
+	if (c.Transport != "sim" || c.OwnerLogin || c.FleetEnabled()) && c.Insecure {
 		return c, errors.New("real Tesla transports require independent JWT_SECRET and MILESIGHT_ENCRYPTION_KEY")
 	}
 	if c.Transport != "sim" && c.DevLogin {
